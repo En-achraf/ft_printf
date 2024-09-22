@@ -27,14 +27,30 @@ static int	numlenth(int a)
 	return (count);
 }
 
+static int	numlenth_hex(unsigned long num)
+{
+	int	len;
+
+	len = 0;
+	if (num == 0)
+		return (1);
+	while (num != 0)
+	{
+		num /= 16;
+		len++;
+	}
+	return (len);
+}
+
 int	ft_printf(const char *format, ...)
 {
-	int		i;
-	int		lenth_result;
-	va_list	arg;
-	char	ch_fo;
-	char	*str_fo;
-	int		dec_fo;
+	int				i;
+	int				lenth_result;
+	va_list			arg;
+	char			ch_fo;
+	char			*str_fo;
+	int				dec_fo;
+	unsigned long	ptr_val;
 
 	i = 0;
 	lenth_result = 0;
@@ -65,8 +81,17 @@ int	ft_printf(const char *format, ...)
 				ft_putnbr_fd(dec_fo, 1);
 				lenth_result += numlenth(dec_fo);
 			}
-			else if () {
-				
+			else if (format[i] == 'p')
+			{
+				//this for the &
+				// Get the pointer and cast it to unsigned long
+				ptr_val = (unsigned long)va_arg(arg, void *);
+				ft_putstr_fd("0x", 1);
+				if (ptr_val == 0)
+					ft_putchar_fd('0', 1);
+				else
+					ft_puthex_fd(ptr_val, 1);
+				lenth_result += 2 + numlenth_hex(ptr_val);
 			}
 		}
 		else
@@ -84,7 +109,9 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	ft_printf("this is the a char : %d %c %c %s \n", 6, 'b', 'n',
-		"hello world");
-	printf("this is the a char : %c %c %c %s \n", 'v', 'b', 'n', "hello world");
+	char *p;
+	p = "hello world";
+
+	ft_printf("this is the a char : %d %c %c %s %p \n", 6, 'b', 'n',"hello world", &p);
+	printf("this is the a char : %d %c %c %s %p \n", 6, 'b', 'n',"hello world", &p);
 }
