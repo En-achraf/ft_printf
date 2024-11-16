@@ -6,7 +6,7 @@
 /*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 13:14:33 by acennadi          #+#    #+#             */
-/*   Updated: 2024/11/15 17:25:24 by acennadi         ###   ########.fr       */
+/*   Updated: 2024/11/16 16:59:06 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	more_form(va_list pt_arg, const char *format, int i)
 	len = 0;
 	if (format[i] == 'd' || format[i] == 'i')
 	{
-		ft_putnbr(va_arg(pt_arg, int), &count);
+		ft_putnbr(va_arg(pt_arg, int), &len);
 		count += len;
 	}
 	if (format[i] == 'p')
@@ -56,8 +56,8 @@ int	more_form(va_list pt_arg, const char *format, int i)
 		if (pt_arg == 0)
 			ft_putchar('0');
 		else
-			ft_puthex((unsigned long)va_arg(pt_arg, void *), &count);
-		count += 2;
+			ft_puthex((unsigned long)va_arg(pt_arg, void *), &len);
+		count += (len + 2);
 	}
 	if (format[i] == 'u')
 		ft_unputnbr((unsigned int)va_arg(pt_arg, unsigned int), &count);

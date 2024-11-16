@@ -12,9 +12,6 @@ all : $(NAME)
 $(NAME) : $(OBJECTS)
 	@ar rcs $(NAME) $(OBJECTS)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
-
 clean :
 	@rm -rf $(OBJECTS)
 
@@ -23,4 +20,4 @@ fclean : clean
 
 re : fclean all
 
-.PHONY : all re fclean clean bonus
+.PHONY : all re fclean clean
