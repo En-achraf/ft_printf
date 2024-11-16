@@ -6,7 +6,7 @@
 /*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 17:31:08 by acennadi          #+#    #+#             */
-/*   Updated: 2024/11/15 14:03:36 by acennadi         ###   ########.fr       */
+/*   Updated: 2024/11/16 17:08:29 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_puthex(unsigned long n, int *lenth)
 {
-	char *hex;
+	char	*hex;
 
 	hex = "0123456789abcdef";
 	if (n >= 16)
