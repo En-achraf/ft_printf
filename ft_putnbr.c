@@ -1,18 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 18:14:55 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/30 18:15:24 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/04 05:37:14 by acennadi          #+#    #+#             */
+/*   Updated: 2024/11/14 16:15:25 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar_fd(char c, int fd)
+void	ft_putnbr(int n, int *len)
 {
-	write(fd, &c, 1);
+	unsigned int	nb;
+
+	nb = n;
+	if (n < 0)
+	{
+		ft_putchar('-');
+		(*len)++;
+		nb = -nb;
+	}
+	if (nb < 10)
+	{
+		ft_putchar(nb + '0');
+		(*len)++;
+	}
+	else
+	{
+		ft_putnbr(nb / 10, len);
+		ft_putnbr(nb % 10, len);
+	}
 }

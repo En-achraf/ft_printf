@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putnb_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 18:16:20 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/02 12:48:07 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/16 04:51:40 by acennadi          #+#    #+#             */
+/*   Updated: 2024/11/16 04:51:41 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_puthex_fd(unsigned long n, int fd, int **lenth)
+void	putnb_hex(unsigned int number, int mode, int *len)
 {
 	char	*hex;
+	char	*hex1;
 
 	hex = "0123456789abcdef";
-	if (n >= 16)
+	hex1 = "012345689ABCDEF";
+	if (number >= 16)
+		ft_puthex(number / 16, len);
+	if (mode == 1)
 	{
-		ft_puthex_fd(n / 16, fd, lenth);
+		ft_putchar(hex[number % 16]);
+		(*len)++;
 	}
-	ft_putchar_fd(hex[n % 16], 1);
-	(**lenth)++;
+	if (mode == 0)
+	{
+		ft_putchar(hex1[number % 16]);
+		(*len)++;
+	}
 }

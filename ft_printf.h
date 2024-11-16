@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 18:12:47 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/02 12:39:49 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/12 16:14:20 by acennadi          #+#    #+#             */
+/*   Updated: 2024/11/16 04:53:06 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 # define FT_PRINTF_H
 
 # include <stdarg.h>
-# include <stdlib.h>
 # include <unistd.h>
 
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putchar_fd(char c, int fd);
-void	ft_putnbr_fd(int n, int fd, int **lenth);
-void	ft_puthex_fd(unsigned long n, int fd, int **lenth);
-void	ft_putunsnbr_fd(unsigned int nb, int fd);
-int		ft_printf(const char *format, ...);
-int		ft_strlen(const char *s);
+int		ft_printf(const char *, ...);
+void	ft_putchar(char c);
+void	ft_putnbr(int n, int *len);
+size_t	ft_strlen(const char *s);
+int		ft_putstr(char *s);
+int		more_form(va_list pt_arg, const char *format, int i);
+void	ft_puthex(unsigned long n, int *lenth);
+void	ft_unputnbr(unsigned int nb, int *len);
+void	putnb_hex(unsigned int number, int mode, int *len);
 
 #endif

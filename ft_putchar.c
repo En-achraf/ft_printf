@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_puthex.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 17:31:08 by acennadi          #+#    #+#             */
-/*   Updated: 2024/11/15 14:03:36 by acennadi         ###   ########.fr       */
+/*   Created: 2024/11/03 20:16:46 by acennadi          #+#    #+#             */
+/*   Updated: 2024/11/13 18:23:22 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_puthex(unsigned long n, int *lenth)
+void	ft_putchar(char c)
 {
-	char *hex;
-
-	hex = "0123456789abcdef";
-	if (n >= 16)
-		ft_puthex(n / 16, lenth);
-	ft_putchar(hex[n % 16]);
-	(*lenth)++;
+	write(1, &c, 1);
 }

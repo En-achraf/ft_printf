@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_unputnbr.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 18:39:16 by marvin            #+#    #+#             */
-/*   Updated: 2024/09/30 18:39:29 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/16 04:51:47 by acennadi          #+#    #+#             */
+/*   Updated: 2024/11/16 04:55:01 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr_fd(char *s, int fd)
+void	ft_unputnbr(unsigned int nb, int *len)
 {
-	while (*s)
+	if (nb < 10)
 	{
-		write(fd, s++, 1);
+		ft_putchar(nb + '0');
+		(*len)++;
+	}
+	else
+	{
+		ft_unputnbr(nb / 10, len);
+		ft_unputnbr(nb % 10, len);
 	}
 }

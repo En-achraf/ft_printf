@@ -3,84 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/30 18:12:22 by marvin            #+#    #+#             */
-/*   Updated: 2024/10/02 12:48:58 by marvin           ###   ########.fr       */
+/*   Created: 2024/11/12 16:14:26 by acennadi          #+#    #+#             */
+/*   Updated: 2024/11/16 14:55:41 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-static void	set_formatv2(const char *format, int i, int *lenth_result,
-		va_list arg)
+static int	form(va_list pt_arg, const char *format, int i)
 {
-	unsigned long	ptr_val;
+	int	count;
+	int	len;
 
-	if (format[i] == 'p')
+	count = 0;
+	if (format[i] == 'c')
 	{
-		ptr_val = (unsigned long)va_arg(arg, void *);
-		ft_putstr_fd("0x", 1);
-		if (ptr_val == 0)
-			ft_putchar_fd('0', 1);
-		else
-			ft_puthex_fd(ptr_val, 1, &lenth_result);
-		*lenth_result+=2;
+		ft_putchar(va_arg(pt_arg, int));
+		count++;
 	}
-}
-
-static void	set_format(const char *format, int i, int *lenth_result,
-		va_list arg)
-{
-	char	charcter;
-	char	*string;
-	int		intform;
-
 	if (format[i] == 's')
 	{
-		string = va_arg(arg, char *);
-		ft_putstr_fd(string, 1);
-		*lenth_result += ft_strlen(string);
+		len = ft_putstr(va_arg(pt_arg, char *));
+		count += len;
 	}
-	else if (format[i] == 'c')
-	{
-		charcter = (char)va_arg(arg, int);
-		ft_putchar_fd(charcter, 1);
-		(*lenth_result)++;
-	}
-	else if (format[i] == 'd' || format[i] == i)
-	{
-		intform = va_arg(arg, int);
-		ft_putnbr_fd(intform, 1, &lenth_result);
-	}
-	else if (format[i] == '%')
-		ft_putchar_fd('%', 1);
-	set_formatv2(format, i, lenth_result, arg);
+	count += more_form(pt_arg, format, i);
+	return (count);
 }
 
 int	ft_printf(const char *format, ...)
 {
+	va_list	ptr_arg;
 	int		i;
-	int		lenth_result;
-	va_list	arg;
+	int		count;
 
+	count = 0;
 	i = 0;
-	lenth_result = 0;
-	va_start(arg, format);
+	va_start(ptr_arg, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
 		{
 			i++;
-			set_format(format, i, &lenth_result, arg);
+			count += form(ptr_arg, format, i);
 		}
 		else
 		{
-			ft_putchar_fd(format[i], 1);
-			lenth_result++;
+			ft_putchar(format[i]);
+			i++;
+			count++;
 		}
 		i++;
 	}
-	va_end(arg);
-	return (lenth_result);
+	return (count);
 }
