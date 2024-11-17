@@ -6,15 +6,15 @@
 /*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:14:20 by acennadi          #+#    #+#             */
-/*   Updated: 2024/11/16 17:26:15 by acennadi         ###   ########.fr       */
+/*   Updated: 2024/11/17 18:09:08 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdarg.h>
 # include <unistd.h>
+# include <stdarg.h>
 
 int		ft_printf(const char *format, ...);
 void	ft_putchar(char c);
