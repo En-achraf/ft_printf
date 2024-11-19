@@ -6,7 +6,7 @@
 /*   By: acennadi <acennadi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/12 16:14:26 by acennadi          #+#    #+#             */
-/*   Updated: 2024/11/17 18:03:12 by acennadi         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:05:33 by acennadi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,11 @@ static int	form(va_list pt_arg, const char *format, int i)
 	return (count);
 }
 
-int	ft_printf(const char *format, ...)
+static int	ft_read(const char *format, va_list ptr_arg, int i, int tmp_count)
 {
-	va_list	ptr_arg;
+	int	count;
 
-	int
-		(i), (count), (tmp_count);
-	i = 0;
 	count = 0;
-	tmp_count = 0;
-	if (!format || write(1, 0, 0) == -1)
-		return (-1);
-	va_start(ptr_arg, format);
 	while (format[i])
 	{
 		if (format[i] == '%')
@@ -70,5 +63,22 @@ int	ft_printf(const char *format, ...)
 			ft_print(format, i, &count);
 		i++;
 	}
+	return (count);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	ptr_arg;
+
+	int
+		(i), (count), (tmp_count);
+	i = 0;
+	count = 0;
+	tmp_count = 0;
+	if (!format || write(1, 0, 0) == -1)
+		return (-1);
+	va_start(ptr_arg, format);
+	count += ft_read(format, ptr_arg, i, tmp_count);
+	va_end(ptr_arg);
 	return (count);
 }
